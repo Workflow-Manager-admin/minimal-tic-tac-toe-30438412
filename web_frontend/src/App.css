@@ -20,15 +20,169 @@
   --button-bg: #0056b3;
   --button-text: #ffffff;
 }
-
+/* General App styles */
 .App {
   text-align: center;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
+.tic-tac-toe-root main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  width: 100vw;
+}
+
+.tic-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 1.2rem 0;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.tic-status {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1.3rem;
+  background: var(--bg-secondary);
+  padding: 0.6em 1.2em;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  min-width: 220px;
+  outline: none;
+}
+
+/* Board grid container */
+.tic-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(60px, 1fr));
+  grid-template-rows: repeat(3, 60px);
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  outline: none;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.tic-square {
+  width: 64px;
+  height: 64px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 2rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border 0.2s, background 0.2s, color 0.2s, box-shadow 0.18s;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(48,44,34,0.03);
+  letter-spacing: 0.04em;
+}
+.tic-square:hover:not(:disabled),
+.tic-square:focus:not(:disabled), 
+.tic-focused {
+  border-color: var(--text-secondary);
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.18);
+  z-index: 1;
+}
+.tic-square[aria-disabled="true"] {
+  opacity: 0.55;
+  background: var(--border-color);
+  cursor: default;
+}
+
+/* Prevent selecting win/draw */
+.tic-square:active:not(:disabled) {
+  background: var(--bg-secondary);
+}
+
+.tic-reset-btn {
+  margin-top: 0.5rem;
+  padding: 0.7em 2.1em;
+  border: none;
+  border-radius: 9px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--button-bg); 
+  color: var(--button-text);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, transform 0.08s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  outline: none;
+}
+.tic-reset-btn:hover, .tic-reset-btn:focus {
+  background: #0f73d0;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.tic-footer {
+  margin-top: 1.8em;
+  color: var(--text-secondary);
+  font-size: 0.99rem;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+}
+.tic-footer kbd {
+  font-family: inherit;
+  font-size: 0.99rem;
+  font-weight: 600;
+  background: var(--border-color);
+  border: 1px solid var(--button-bg);
+  border-radius: 5px;
+  padding: 2px 6px;
+  margin: 0 1px;
+  color: var(--text-primary);
+}
+
+/* Responsive board/grid for smaller screens */
+@media (max-width: 600px) {
+  .tic-board {
+    grid-template-columns: repeat(3, minmax(46px, 1fr));
+    grid-template-rows: repeat(3, 46px);
+    gap: 0.36rem;
+  }
+  .tic-square {
+    width: 46px;
+    height: 46px;
+    font-size: 1.26rem;
+    border-radius: 7px;
+  }
+  .tic-title {
+    font-size: 1.49rem;
+    margin-bottom: 0.9rem;
+  }
+  .tic-status {
+    font-size: 1rem;
+    padding: 0.4em 0.6em;
+    border-radius: 8px;
+    min-width: 160px;
+  }
+  .tic-reset-btn {
+    font-size: 0.94rem;
+    padding: 0.55em 1.45em;
+    border-radius: 7px;
+  }
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
